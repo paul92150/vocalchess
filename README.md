@@ -1,9 +1,15 @@
 # ♟️ VocalChess – Play Blindfolded, With Your Voice
 
-**VocalChess** is a fun personal project that lets you play chess **blindfolded**, using only **your voice** to make moves.  
-You start by playing **human moves** extracted from Lichess opening databases, and switch to **Stockfish** once you're off book.
+**VocalChess** is a fun personal project that explores how to play chess **blindfolded**, using only **your voice** to make moves.
 
-This is still a **work in progress**, but the core logic is working and open to further expansion.
+Right now, two modes exist:
+- A **vocal mode**, where you play against **Stockfish** using speech recognition and text-to-speech.
+- A **graphical mode**, where you play against the most common **human moves** (scraped from Lichess) until the position is no longer known — then Stockfish takes over.
+
+In the future, the goal is to **merge these two** so that you can speak your moves and face real human openings, fully blindfolded.
+
+This is still a **work in progress**, but the core mechanics are working and ready to grow!
+
 
 ---
 

@@ -1,0 +1,7 @@
+pygame
+speechrecognition
+pyttsx3
+chess
+requests
+cairosvg
+pynput

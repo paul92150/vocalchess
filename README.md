@@ -4,7 +4,7 @@
 
 Right now, two modes exist:
 - A **vocal mode**, where you play against **Stockfish** using speech recognition and text-to-speech.
-- A **graphical mode**, where you play against the most common **human moves** (scraped from Lichess) until the position is no longer known — then Stockfish takes over.
+- A **graphical mode**, where you play against the most common **human moves** (scraped from Lichess) until the position is no longer known, then Stockfish takes over.
 
 In the future, the goal is to **merge these two** so that you can speak your moves and face real human openings, fully blindfolded.
 

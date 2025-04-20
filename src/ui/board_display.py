@@ -14,7 +14,7 @@ BLUE = (0, 0, 200)
 RED = (255, 0, 0)
 SELECTED_COLOR = (255, 255, 0)
 FONT_COLOR = (0, 0, 0)
-SIDEBAR_WIDTH = 150
+SIDEBAR_WIDTH = 200
 
 # === Piece Loader ===
 
@@ -45,7 +45,7 @@ def load_piece_surfaces():
 
 # === Drawing Functions ===
 
-def draw_board(screen, game_count):
+def draw_board(screen, game_count = 1):
     for row in range(8):
         for col in range(8):
             color = RED if game_count == 0 and (row + col) % 2 != 0 else WHITE if (row + col) % 2 == 0 else BLUE

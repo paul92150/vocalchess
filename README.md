@@ -1,209 +1,161 @@
-# ♟️ VocalChess – Play Blindfolded, With Your Voice
+# VocalChess – Voice-Controlled Blindfold Chess Interface
 
-**VocalChess** is a fun personal project that explores how to play chess **blindfolded**, using only **your voice** to make moves.
+**VocalChess** is an experimental project exploring voice-based blindfold chess through speech recognition, natural language processing, and chess engine integration. The system enables players to make chess moves entirely by voice, without visual feedback, simulating blindfolded play against engines and statistically common human openings.
 
-It now includes multiple experimental game modes:
-- A **vocal mode** where you play against **Stockfish**, using voice commands and audio feedback.
-- A **graphical mode** where you play against the most common **human moves** (scraped from Lichess) until the position is no longer known — then **Stockfish** takes over.
-- A **tuned engine mode**, where you play Stockfish with adjustable **depth** or **time limits**.
-- A **translator tool**, which converts natural language chess moves like `"knight takes f6"` into UCI moves.
-- A **FEN visualizer**, to display board positions from any FEN string.
+Originally developed as a personal exploration, VocalChess demonstrates applied skills in real-time input parsing, rule-based systems, NLP, and human-computer interaction—relevant to domains like algorithmic trading, research systems, and decision-making under uncertainty.
 
-The goal is to **merge everything** into a seamless experience: play against human openings with your voice, blindfolded — and explore positions naturally.
+## Overview
 
-This is still a **work in progress**, but the core mechanics are solid and open to contribution!
+VocalChess includes several experimental gameplay modes:
+- Vocal Blindfold Mode: Play against Stockfish using only speech input and audio feedback.
+- Human-Then-Engine Mode: Play against statistically common human moves (scraped from Lichess); fallback to Stockfish beyond book.
+- Tunable Engine Mode: Dynamically adjust Stockfish’s search depth or time to simulate variable opponent strength.
+- Natural Language Translator: Convert spoken or typed instructions like "knight takes f6" into legal UCI moves, based on current board state.
+- FEN Visualizer: Display board positions from arbitrary FEN strings in a minimal graphical interface.
 
----
+## Core Features
 
-## 🎯 Goals
+- Fully voice-controlled blindfold chess experience via speech-to-text and text-to-speech.
+- Hybrid decision logic: human openings from Lichess Explorer combined with fallback to Stockfish.
+- Natural language understanding for flexible move input.
+- Real-time board validation and error handling.
+- Tunable engine difficulty for customized gameplay.
+- Debugging tools for FEN testing and move translation.
 
-- 🔊 Play chess **without seeing the board**, using **speech recognition**.
-- 🧠 Start with **human openings** via the **Lichess Explorer API**.
-- ♟️ If no human data is found, fallback to **Stockfish**.
-- 🗣️ All moves (yours and engine's) are spoken aloud using **text-to-speech**.
-- 🪄 Translate natural language like `"knight takes e5"` into valid moves.
-- 🎛️ Adjust Stockfish **difficulty** (time or depth).
-- 🧪 Easily test FENs and move parsers with debugging tools.
+## Project Structure
 
----
-
-## 🗂️ Project Structure
-
-```
+```text
 vocalchess/
 ├── assets/
-│   └── pieces/             ← SVG pieces used for graphical version
+│   └── pieces/                  ← SVG pieces for GUI
 ├── scripts/
-│   ├── play_graphic.py           ← Click-to-play humans-then-Stockfish
-│   ├── play_vocal.py             ← Blindfold vocal Stockfish mode
-│   ├── play_blindfold_lichess.py ← Blindfold vocal vs human openings (WIP)
-│   ├── play_stockfish_tuned.py   ← Play vs Stockfish with tunable difficulty
-│   └── _setup_path.py            ← Adds src/ to PYTHONPATH
-│
+│   ├── play_graphic.py          ← Click-to-play humans then Stockfish
+│   ├── play_vocal.py            ← Vocal blindfold mode
+│   ├── play_blindfold_lichess.py← WIP: vocal vs human openings
+│   ├── play_stockfish_tuned.py  ← Stockfish with tunable difficulty
+│   └── _setup_path.py           ← Adds src/ to PYTHONPATH
 ├── tools/
-│   ├── translate_move.py   ← Test move translation from natural language
-│   └── view_fen.py         ← Visualize any FEN using the GUI
-│
+│   ├── translate_move.py        ← Test natural language move parsing
+│   └── view_fen.py              ← Visualize FEN in GUI
 ├── src/
 │   ├── game/
-│   │   ├── lichess_moves.py       ← Fetch & weight moves from Lichess API
-│   │   ├── stockfish_engine.py    ← Interface with Stockfish engine
-│   │   └── fen_presets.py         ← FENs for known openings
-│   │
+│   │   ├── lichess_moves.py     ← Lichess API integration
+│   │   ├── stockfish_engine.py  ← Stockfish interface
+│   │   └── fen_presets.py       ← Known opening FENs
 │   ├── translator/
-│   │   └── move_translator.py     ← Parse speech like "knight takes f6"
-│   │
+│   │   └── move_translator.py   ← Natural language to UCI parser
 │   ├── voice/
-│   │   ├── recognizer.py          ← Speech-to-text
-│   │   ├── tts.py                 ← Text-to-speech feedback
-│   │   └── keyboard_listener.py  ← Space bar trigger to speak
-│   │
+│   │   ├── recognizer.py        ← Speech recognition
+│   │   ├── tts.py               ← Text-to-speech output
+│   │   └── keyboard_listener.py ← Voice trigger (space bar)
 │   ├── ui/
-│   │   └── board_display.py       ← Render board and sidebar with Pygame
-│   │
+│   │   └── board_display.py     ← GUI board rendering (Pygame)
 │   └── utils/
-│       └── move_utils.py          ← Move validation helpers
-│
+│       └── move_utils.py        ← Move validation helpers
 ├── requirements.txt
 └── README.md
 ```
 
----
-
-## ⚙️ Installation
-
-### 1. Clone the repo
+## Installation
 
 ```bash
 git clone https://github.com/paul92150/vocalchess.git
 cd vocalchess
-```
-
-### 2. (Optional) Create a virtual environment
-
-```bash
 python3 -m venv venv
-source venv/bin/activate  # or venv\Scripts\activate on Windows
-```
-
-### 3. Install the dependencies
-
-```bash
+source venv/bin/activate  # On Windows: venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-> Make sure `stockfish` is installed and available in your path, or update `stockfish_engine.py`.
+Make sure `stockfish` is installed and available in your system PATH. You can modify its path in `stockfish_engine.py` if needed.
 
----
+## How to Use
 
-## 🎮 How to Use
-
-### ▶️ Graphical (humans → Stockfish)
-
-```bash
-python scripts/play_graphic.py
-```
-
-- Play by clicking.
-- Human moves are fetched from Lichess.
-- When you're off-book, Stockfish takes over.
-
----
-
-### 🎤 Vocal Blindfold Mode
+### Blindfold Vocal Mode
 
 ```bash
 python scripts/play_vocal.py
 ```
 
-- Play Stockfish **without visuals**, using your voice.
-- Press **space**, speak your move ("Knight to f3", "e4", etc.)
-- The board is updated and spoken aloud.
+Press space to speak your move.  
+Example commands: "knight to f3", "e takes d4", "castle kingside".  
+All moves (yours and engine's) are read aloud.
 
----
+### Human Openings Then Stockfish
 
-### 🧠 Tunable Stockfish Difficulty
+```bash
+python scripts/play_graphic.py
+```
+
+Start by playing against statistically common human moves.  
+When out-of-book, Stockfish takes over.
+
+### Tunable Stockfish Mode
 
 ```bash
 python scripts/play_stockfish_tuned.py
 ```
 
-- Adjust time/depth via keyboard:
-  - `← / →` to tune time
-  - `↑ / ↓` to tune depth
-  - `T` to toggle between them
+Adjust difficulty using arrow keys:  
+← / → to modify time limit  
+↑ / ↓ to modify search depth  
+Press T to toggle between the two modes
 
----
+### Tools
 
-### 🧪 Tools
-
-#### 🧙 Natural Language Move Translator
+Move Translator Tester:
 
 ```bash
 python tools/translate_move.py
 ```
 
-Test how well natural commands like `"bishop to c4"` or `"e takes d4"` are understood.
-
-#### 🔍 FEN Visualizer
+FEN Visualizer:
 
 ```bash
 python tools/view_fen.py
 ```
 
-Paste in any FEN and view the position on a board.
+## Example Commands
+
+| Spoken Input        | UCI Output |
+|---------------------|------------|
+| "Knight to f3"      | g1f3       |
+| "e takes d4"        | e3d4       |
+| "castle kingside"   | e1g1       |
+| "bishop takes f6"   | g5f6       |
+| "pawn to a4"        | a2a4       |
+
+## Requirements
+
+Main dependencies:
+- python-chess
+- pygame
+- speechrecognition
+- pyttsx3
+- requests
+- cairosvg
+
+All packages are listed in `requirements.txt`.
+
+## Roadmap
+
+- Unify vocal and human-opening logic into one seamless blindfold mode.
+- Improve natural language robustness and ambiguity handling.
+- Add support for other engines (Leela, Torch, etc.).
+- Enable PGN export, replay, and training features.
+- Add online mode with Lichess/Chess.com API integration.
+
+## Author
+
+**Paul Lemaire**  
+MSc candidate at CentraleSupélec  
+LinkedIn: https://www.linkedin.com/in/paul-lemaire-aa0369289
+
+## Disclaimer
+
+This is a personal, research-oriented project built for learning and experimentation. Contributions are welcome.
 
 ---
 
-## ✅ Example Commands Recognized
-
-- `"Knight to f3"` → `g1f3`
-- `"e takes d4"` → `e3d4`
-- `"castle kingside"` → `e1g1`
-- `"pawn to a4"` → `a2a4`
-- `"bishop takes f6"` → `g5f6`
-
-✔ All translated into valid UCI moves using current board state.
-
----
-
-## 📦 Requirements
-
-See `requirements.txt` for full list:
-
-- `pygame`
-- `python-chess`
-- `speechrecognition`
-- `pyttsx3`
-- `cairosvg`
-- `requests`
-
----
-
-## 🚀 Future Plans
-
-- 🔗 Merge vocal and human move logic into a single experience
-- 🎙️ Natural voice command parsing (e.g. "play pawn to center")
-- ⚙️ Adjustable difficulty & multiple engines (Leela, Torch, etc.)
-- 🌐 Online play via Lichess or Chess.com automation
-- 📈 Export to PGN, analyze with engine
-- ↩️ Takebacks, manual move input, full training mode
-
----
-
-## 👨‍💻 Author
-
-Built with love by [Paul Lemaire](https://www.linkedin.com/in/paul-lemaire-aa0369289)
-
-This is a hobby project — feel free to fork, explore, and contribute!  
-
-
-## 🧪 Disclaimer
-
-This is a personal side project made for fun and learning. Contributions and ideas welcome!
-
----
-
-## 📄 License
+## License
 
 MIT License – see `LICENSE` file.

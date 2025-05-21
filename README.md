@@ -152,7 +152,7 @@ LinkedIn: https://www.linkedin.com/in/paul-lemaire-aa0369289
 
 ## Disclaimer
 
-This is a personal, research-oriented project built for learning and experimentation. Contributions are welcome.
+This is a personal, research-oriented project built for learning and experimentation. Contributions are always welcome.
 
 ---
 

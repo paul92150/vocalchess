@@ -2,7 +2,7 @@
 
 **VocalChess** is an experimental project exploring voice-based blindfold chess through speech recognition, natural language processing, and chess engine integration. The system enables players to make chess moves entirely by voice, without visual feedback, simulating blindfolded play against engines and statistically common human openings.
 
-Originally developed as a personal exploration, VocalChess demonstrates applied skills in real-time input parsing, rule-based systems, NLP, and human-computer interaction—relevant to domains like algorithmic trading, research systems, and decision-making under uncertainty.
+Originally developed as a personal exploration, VocalChess demonstrates applied skills in real-time input parsing, rule-based systems, NLP, and human-computer interaction, relevant to domains like algorithmic trading, research systems, and decision-making under uncertainty.
 
 ## Overview
 

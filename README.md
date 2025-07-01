@@ -1,4 +1,4 @@
-# VocalChess – Voice-Controlled Blindfold Chess Interface
+# VocalChess - Voice-Controlled Blindfold Chess Interface
 
 **VocalChess** is an experimental project exploring voice-based blindfold chess through speech recognition, natural language processing, and chess engine integration. The system enables players to make chess moves entirely by voice, without visual feedback, simulating blindfolded play against engines and statistically common human openings.
 
@@ -158,4 +158,4 @@ This is a personal, research-oriented project built for learning and experimenta
 
 ## License
 
-MIT License – see `LICENSE` file.
+MIT License - see `LICENSE` file.
